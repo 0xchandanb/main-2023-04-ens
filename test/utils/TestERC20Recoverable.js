@@ -33,18 +33,13 @@ contract('ERC20Recoverable', function (accounts) {
       const ERC20RecoverableWithAccount2 = await ERC20Recoverable.connect(
         signers[1],
       )
-      // await expect(
-      //   ERC20RecoverableWithAccount2.recoverFunds(
-      //     ERC20Token.address,
-      //     accounts[1],
-      //     1000,
-      //   ),
-      // ).to.be.revertedWith('Ownable: caller is not the owner')
-      await ERC20RecoverableWithAccount2.recoverFunds(
+      await expect(
+        ERC20RecoverableWithAccount2.recoverFunds(
           ERC20Token.address,
           accounts[1],
           1000,
-        )
+        ),
+      ).to.be.revertedWith('Ownable: caller is not the owner')
     })
   })
 })
